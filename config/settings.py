@@ -2,6 +2,7 @@
 Django settings for the IP Tracking backend project.
 """
 
+from celery.schedules import crontab
 import os
 from pathlib import Path
 
@@ -87,6 +88,42 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
+
+# Caching Configuration (for geolocation and rate limiting)
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+        'TIMEOUT': 86400,  # 24 hours default
+    }
+}
+
+# Rate Limiting Configuration
+RATELIMIT_ENABLE = True
+RATELIMIT_USE_CACHE = 'default'
+RATELIMIT_VIEW = 'ip_tracking.views.rate_limit_exceeded'
+
+# Rate limit rules:
+# - Authenticated users: 10 requests/minute
+# - Anonymous users: 5 requests/minute per IP
+
+# Celery Configuration
+CELERY_BROKER_URL = 'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379/0'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60  # 30 minutes
+
+# Celery Beat Schedule (periodic tasks)
+CELERY_BEAT_SCHEDULE = {
+    'check-anomalies-hourly': {
+        'task': 'ip_tracking.tasks.detect_anomalies',
+        'schedule': crontab(minute=0),  # Run every hour
+    },
+}
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
