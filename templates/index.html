@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Tracking Backend</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            padding: 40px;
+            max-width: 600px;
+            width: 100%;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+            font-size: 32px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        
+        .info-section {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .info-section h2 {
+            color: #667eea;
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+        
+        .info-section p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+        
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #4caf50;
+        }
+        
+        .links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #667eea;
+            color: white;
+            text-decoration: none;
+            border-radius: 6px;
+            transition: background 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .btn:hover {
+            background: #764ba2;
+        }
+        
+        .btn.secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+        
+        .btn.secondary:hover {
+            background: #d0d0d0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 IP Tracking Backend</h1>
+        <p class="subtitle">Django IP Logging, Blacklisting & Geolocation Module</p>
+        
+        <div class="info-section">
+            <h2>Task 0: Basic IP Logging Middleware</h2>
+            <div class="status">
+                <span class="status-badge"></span>
+                <span><strong>Status:</strong> Active</span>
+            </div>
+            <p>✅ <strong>IPTrackingMiddleware</strong> - Logs IP addresses, timestamps, and request paths</p>
+            <p>✅ <strong>RequestLog Model</strong> - Stores IP logs with efficient indexing</p>
+            <p>✅ <strong>Middleware Registered</strong> - Integrated in settings.py</p>
+        </div>
+        
+        <div class="info-section">
+            <h2>Features Implemented</h2>
+            <p>📝 Request logging middleware with IP extraction</p>
+            <p>🗄️ Django ORM model for persistent storage</p>
+            <p>🔒 IPv4 and IPv6 validation</p>
+            <p>⚡ Optimized with database indexing</p>
+            <p>🌐 Proxy detection (X-Forwarded-For support)</p>
+        </div>
+        
+        <div class="links">
+            <a href="/admin/" class="btn">Admin Panel</a>
+            <a href="https://github.com/BuomYian/alx-backend-security" class="btn secondary">Repository</a>
+        </div>
+    </div>
+</body>
+</html>
